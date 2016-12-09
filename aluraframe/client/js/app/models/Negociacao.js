@@ -3,8 +3,8 @@ class Negociacao
 	constructor(data, quantidade, valor)
 	{
 		this._data = new Date(data.getTime());
-		this._quantidade = 1;
-		this._valor = 0.0;
+		this._quantidade = quantidade;
+		this._valor = valor;
 
 		Object.freeze(this);
 	}
@@ -27,5 +27,13 @@ class Negociacao
 	get valor()
 	{
 		return this._valor;
+	}
+
+	toString()
+	{
+		return data() 
+			+ ', ' + quantidade()
+			+ ', ' +  valor()
+			+ ', ' +  volume()
 	}
 }
