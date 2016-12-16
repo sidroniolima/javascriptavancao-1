@@ -5,21 +5,21 @@ class NegociacaoController
 	{
 
 		let $ = document.querySelector.bind(document);
-
+		
 		this._inputData = $('#data');
 		this._inputQuantidade = $('#quantidade');
 		this._inputValor = $('#valor');
+
+		this._listaNegociacoes = new ListaNegociacoes();
+		this._negociacoesView = new NegociacoesView($('#negociacoesView'));
+
+		this._negociacoesView.update(this._listaNegociacoes);
 	}
 
-	criaNegociacao()
+	_criaNegociacao()
 	{
 		return new Negociacao(
-			new Date(...
-				this._inputData.value
-					.split('/')
-					.reverse()
-					.map((item, indice) => indice % 2 == 0 ? item : item = item -1)
-				),
+			DateHelper.textoParaData(this._inputData.value),
 			this._inputQuantidade.value,
 			this._inputValor.value
 		);
@@ -29,17 +29,15 @@ class NegociacaoController
 	{
 		event.preventDefault();
 
-		let negociacao = this.criaNegociacao();
+		this._listaNegociacoes.adiciona(this._criaNegociacao());
 
-		console.log(negociacao.data 
-			+ ', ' + negociacao.quantidade
-			+ ', ' +  negociacao.valor
-			+ ', ' +  negociacao.volume);
+		this._listaNegociacoes.negociacoes.forEach((n) => console.log(n.toString()));
 
-		this.limpaFormulario();
+		this._limpaFormulario();
+		this._negociacoesView.update(this._listaNegociacoes);
 	}
 
-	limpaFormulario()
+	_limpaFormulario()
 	{
 		this._inputData.value = '';
 		this._inputValor.value = 0;

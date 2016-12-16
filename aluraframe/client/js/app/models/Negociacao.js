@@ -31,9 +31,9 @@ class Negociacao
 
 	toString()
 	{
-		return data() 
-			+ ', ' + quantidade()
-			+ ', ' +  valor()
-			+ ', ' +  volume()
+		return this.data 
+			+ ', ' + this.quantidade
+			+ ', ' +  this.valor
+			+ ', ' +  this.volume
 	}
 }
